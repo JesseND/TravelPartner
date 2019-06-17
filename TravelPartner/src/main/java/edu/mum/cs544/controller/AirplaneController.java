@@ -19,7 +19,6 @@ public class AirplaneController {
     @GetMapping()
     public String allAirlines(Model model){
         List<Airplane> airplanes = airplaneService.getAll();
-
         model.addAttribute("airplanes", airplanes);
         return "airplane/airplaneList";
     }
