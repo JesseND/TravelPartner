@@ -2,14 +2,8 @@ package edu.mum.cs544.bean;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+public class Room implements Serializable {
 
-public class Room  implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private RoomIdentity roomId;
@@ -17,7 +11,7 @@ public class Room  implements Serializable{
 	private double pricePerNight;
 
 	private int maxPersons;
-	
+
 	private boolean reserved;
 
 	public Room() {
