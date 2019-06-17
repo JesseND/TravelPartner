@@ -9,16 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
-public class FlightService {
+public class AirlineService {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String flightUrl = "http://localhost:8088/api/flights";
-    private final String airlineUrl = "http://localhost:8088/api/airline";
+    private final String flightUrl = "http://localhost:8077/api/flights";
+    private final String airlineUrl = "http://localhost:8077/api/airline";
+
 
     public List<Flight> getAll(){
         ResponseEntity<List<Flight>> responseEntity =
@@ -34,4 +36,15 @@ public class FlightService {
 
         return responseEntity.getBody();
     }
+
+    //add new airline
+    public void add(Airline airline) {
+        System.out.println("Add.."+airline.toString());
+        URI uri = restTemplate.postForLocation(airlineUrl, airline);
+
+    }
+
+    // update
+
+
 }
