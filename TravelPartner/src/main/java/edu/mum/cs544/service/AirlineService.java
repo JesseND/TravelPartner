@@ -20,6 +20,7 @@ public class AirlineService {
 
     private final String flightUrl = "http://localhost:8077/api/flights";
     private final String airlineUrl = "http://localhost:8077/api/airline";
+    private final String singleAirlineUrl = "http://localhost:8077/api/airline/{id}";
 
 
     public List<Flight> getAll(){
@@ -29,7 +30,7 @@ public class AirlineService {
         return responseEntity.getBody();
     }
 
-    // airlines
+    // all airlines
     public List<Airline> getAirlines(){
         ResponseEntity<List<Airline>> responseEntity =
                 restTemplate.exchange(airlineUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Airline>>() {});
@@ -44,7 +45,13 @@ public class AirlineService {
 
     }
 
-    // update
+    // get one airline
+    public Airline getOne(Long id){
+        return restTemplate.getForObject(singleAirlineUrl, Airline.class, id);
+    }
 
-
+    // delete airline
+    public void delete(Long id) {
+        restTemplate.delete(singleAirlineUrl, id);
+    }
 }
