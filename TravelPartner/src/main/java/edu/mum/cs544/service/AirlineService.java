@@ -18,17 +18,8 @@ public class AirlineService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String flightUrl = "http://localhost:8077/api/flights";
     private final String airlineUrl = "http://localhost:8077/api/airline";
     private final String singleAirlineUrl = "http://localhost:8077/api/airline/{id}";
-
-
-    public List<Flight> getAll(){
-        ResponseEntity<List<Flight>> responseEntity =
-                restTemplate.exchange(flightUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Flight>>() {});
-
-        return responseEntity.getBody();
-    }
 
     // all airlines
     public List<Airline> getAirlines(){

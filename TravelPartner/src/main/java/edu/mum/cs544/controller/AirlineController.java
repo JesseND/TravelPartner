@@ -13,47 +13,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/airlines")
 public class AirlineController {
 
     @Autowired
     private AirlineService airlineService;
 
-    @GetMapping(value = "/airlines")
+    @GetMapping()
     public String allAirlines(Model model){
         List<Airline> airlines = airlineService.getAirlines();
 
         model.addAttribute("airlines", airlines);
-        return "airlineList";
+        return "airline/airlineList";
     }
 
-    @GetMapping(value = "/airlines/{id}")
+    @GetMapping(value = "/{id}")
     public String getOne(@PathVariable Long id, Model model){
         Airline airline = airlineService.getOne(id);
         model.addAttribute("airline", airline);
-        return "airlineDetail";
+        return "airline/airlineDetail";
     }
 
-    @PostMapping(value = "/airlines")
+    @PostMapping()
     public String add(Airline airline){
         airlineService.add(airline);
         return "redirect:/airlines";
     }
 
-    @DeleteMapping(value = "/airlines/{id}")
+    @DeleteMapping(value = "/{id}")
     public String delete(@PathVariable Long id){
         airlineService.delete(id);
         return "redirect:/airlines";
     }
-
-    // flights
-
-    @GetMapping(value = "/flights")
-    public String allFlights(Model model){
-        List<Flight> flightList = airlineService.getAll();
-        model.addAttribute("flights", flightList);
-        return "flight/flightList";
-    }
-
-
 
 }
