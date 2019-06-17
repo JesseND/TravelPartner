@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8">
+    <title>All Airports</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>List of all Airports</h1>
+</div>
+
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Name</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="airport: ${airports}" >
+            <td th:text="${airport.id}"></td>
+            <td th:text="${airport.airportcode}"></td>
+            <td th:text="${airport.city}"></td>
+            <td th:text="${airport.country}"></td>
+            <td th:text="${airport.name}"></td>
+            <td><a th:href="@{/airports/{id}(id = ${airport.id})}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <form class="form-control-sm">-->
+<!--        <button type="submit" class="btn btn-default">Add Airport</button>-->
+<!--    </form>-->
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target=".bd-example-modal-lg">Add Airport</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Add new Airport</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="/airports" method="post">
+                        <div class="form-group">
+                            <label for="nm">Code: </label>
+                            <input type="text" name="airportcode" class="form-control" id="cd" placeholder="Airport Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="nm">City: </label>
+                            <input type="text" name="city" class="form-control" id="ct" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label for="nm">Country: </label>
+                            <input type="text" name="country" class="form-control" id="crty" placeholder="Country">
+                        </div>
+                        <div class="form-group">
+                            <label for="nm">Name: </label>
+                            <input type="text" name="name" class="form-control" id="nm" placeholder="Airport name">
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
