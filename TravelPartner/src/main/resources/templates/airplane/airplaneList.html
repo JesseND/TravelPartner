@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Airplanes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>List of all airplanes</h1>
+</div>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Capacity</th>
+            <th>Model</th>
+            <th>Serial Nbr</th>
+            <th>View</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="airplane: ${airplanes}">
+            <td th:text="${airplane.id}"></td>
+            <td th:text="${airplane.capacity}"></td>
+            <th th:text="${airplane.model}"></th>
+            <th th:text="${airplane.serialnr}"></th>
+            <td><a th:href="@{/airplanes/{id}(id= ${airplane.id})}">View</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target=".bd-example-modal-lg">Add Airplane</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Add new Airplane</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="/airplanes" method="post">
+                        <div class="form-group">
+                            <label for="sr">Serial nbr: </label>
+                            <input type="text" name="serialnr" class="form-control" id="sr" placeholder="Serial number">
+                        </div>
+                        <div class="form-group">
+                            <label for="ct">City: </label>
+                            <input type="text" name="model" class="form-control" id="ct" placeholder="Model">
+                        </div>
+                        <div class="form-group">
+                            <label for="cpty">Country: </label>
+                            <input type="number" name="capacity" class="form-control" id="cpty" placeholder="capacity">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>
