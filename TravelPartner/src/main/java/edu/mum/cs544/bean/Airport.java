@@ -1,6 +1,7 @@
 package edu.mum.cs544.bean;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Airport implements Serializable {
 
@@ -70,5 +71,22 @@ public class Airport implements Serializable {
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Airport)) return false;
+        Airport airport = (Airport) o;
+        return id == airport.id &&
+                airportcode.equals(airport.airportcode) &&
+                name.equals(airport.name) &&
+                city.equals(airport.city) &&
+                country.equals(airport.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, airportcode, name, city, country);
     }
 }
