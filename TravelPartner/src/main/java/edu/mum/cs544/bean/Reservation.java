@@ -6,24 +6,40 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 public class Reservation {
 
+	@Id
+	@GeneratedValue
 	private long id;
 
+	@NotNull
 	private long userId;
 
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@FutureOrPresent
+	@Temporal(TemporalType.DATE)
 	private Date checkin;
 
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Future
+	@Temporal(TemporalType.DATE)
 	private Date checkout;
 
 	private String status;
 
+	@Embedded
+	@NotNull
 	private RoomIdentity roomId;
 
 	public Reservation() {
@@ -37,15 +53,15 @@ public class Reservation {
 		this.roomId = roomId;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public Long getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
