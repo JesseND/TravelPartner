@@ -24,6 +24,7 @@
             <th>Departure Date</th>
             <th>Arrival Date</th>
             <th>View</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -35,7 +36,8 @@
             <td th:text="${flight.destination.airportcode }"></td>
             <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.departureTime, ' HH:mm')}"></td>
             <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.arrivalTime, ' HH:mm')}"></td>
-            <td><a th:href="@{/flights/{id}(id= ${flight.id})}">View</a></td>
+            <td><a class="btn btn-warning btn-sm" th:href="@{/flights/{id}(id= ${flight.id})}" >View</a></td>
+            <td><a class="btn btn-danger btn-sm" th:href="@{/flights/delete/{id}(id= ${flight.id})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

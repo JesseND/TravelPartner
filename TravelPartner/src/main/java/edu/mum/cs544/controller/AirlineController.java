@@ -40,7 +40,7 @@ public class AirlineController {
         return "redirect:/airlines";
     }
 
-    @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable Long id){
         airlineService.delete(id);
         return "redirect:/airlines";
