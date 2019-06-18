@@ -27,8 +27,8 @@
         <tr th:each="airplane: ${airplanes}">
             <td th:text="${airplane.id}"></td>
             <td th:text="${airplane.capacity}"></td>
-            <th th:text="${airplane.model}"></th>
-            <th th:text="${airplane.serialnr}"></th>
+            <td th:text="${airplane.model}"></td>
+            <td th:text="${airplane.serialnr}"></td>
             <td><a th:href="@{/airplanes/{id}(id= ${airplane.id})}">View</a></td>
         </tr>
         </tbody>
@@ -55,11 +55,11 @@
                             <input type="text" name="serialnr" class="form-control" id="sr" placeholder="Serial number">
                         </div>
                         <div class="form-group">
-                            <label for="ct">City: </label>
+                            <label for="ct">Model: </label>
                             <input type="text" name="model" class="form-control" id="ct" placeholder="Model">
                         </div>
                         <div class="form-group">
-                            <label for="cpty">Country: </label>
+                            <label for="cpty">Capacity: </label>
                             <input type="number" name="capacity" class="form-control" id="cpty" placeholder="capacity">
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit" />
