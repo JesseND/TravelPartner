@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    Edit flight
+</div>
+<div class="container">
+    <form class="form-horizontal" th:action="${'/flights/'+flight.id}" method="POST">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="airl">Airline:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="airl" th:value="${flight.airline.name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="flghtnbr">FlightNbr:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="flghtnbr" th:value="${flight.flightnr}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="org">Origin:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="org" th:value="${flight.origin.airportcode}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="dest">Destination:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="dest" th:value="${flight.destination.airportcode}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="dptt">Departure time:</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="dptt"
+                       th:value="${flight.departureDate}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="arrt">Arrival time:</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="arrt" th:value="${flight.arrivalDate}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

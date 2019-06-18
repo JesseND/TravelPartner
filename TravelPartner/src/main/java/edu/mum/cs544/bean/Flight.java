@@ -1,5 +1,7 @@
 package edu.mum.cs544.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
@@ -11,9 +13,17 @@ public class Flight implements Serializable {
 
     private long id;
     private String flightnr;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date departureDate;
+
+    @JsonFormat(pattern = "HH:mm:ss")
     private Date departureTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date arrivalDate;
+
+    @JsonFormat(pattern = "HH:mm:ss")
     private Date arrivalTime;
     private Airline airline;
     private Airport origin;
@@ -29,28 +39,28 @@ public class Flight implements Serializable {
     public Flight() {
     }
 
-    public Flight(String flightnr, String departureDate, String departureTime,
-                  String arrivalDate, String arrivalTime) {
-        this.flightnr = flightnr;
-        setDepartureDate(departureDate);
-        setDepartureTime(departureTime);
-        setArrivalDate(arrivalDate);
-        setArrivalTime(arrivalTime);
-    }
-
-    public Flight(String flightnr, String departureDate, String departureTime,
-                  String arrivalDate, String arrivalTime, Airline airline,
-                  Airport origin, Airport destination, Airplane airplane) {
-        this.flightnr = flightnr;
-        setDepartureDate(departureDate);
-        setDepartureTime(departureTime);
-        setArrivalDate(arrivalDate);
-        setArrivalTime(arrivalTime);
-        this.airline = airline;
-        this.origin = origin;
-        this.destination = destination;
-        this.airplane = airplane;
-    }
+//    public Flight(String flightnr, String departureDate, String departureTime,
+//                  String arrivalDate, String arrivalTime) {
+//        this.flightnr = flightnr;
+//        setDepartureDate(departureDate);
+//        setDepartureTime(departureTime);
+//        setArrivalDate(arrivalDate);
+//        setArrivalTime(arrivalTime);
+//    }
+//
+//    public Flight(String flightnr, String departureDate, String departureTime,
+//                  String arrivalDate, String arrivalTime, Airline airline,
+//                  Airport origin, Airport destination, Airplane airplane) {
+//        this.flightnr = flightnr;
+//        setDepartureDate(departureDate);
+//        setDepartureTime(departureTime);
+//        setArrivalDate(arrivalDate);
+//        setArrivalTime(arrivalTime);
+//        this.airline = airline;
+//        this.origin = origin;
+//        this.destination = destination;
+//        this.airplane = airplane;
+//    }
 
     public Date getDepartureTime() {
         return departureTime;
@@ -72,42 +82,59 @@ public class Flight implements Serializable {
         this.flightnr = flightnr;
     }
 
-    public void setDepartureDate(String departureDate) {
-        try {
-            this.departureDate = df.parse(departureDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 
-    public void setDepartureTime(String departureTime) {
-        try {
-            this.departureTime = tf.parse(departureTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public void setArrivalDate(String arrivalDate) {
-        try {
-            this.arrivalDate = df.parse(arrivalDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
+
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+
+    //    public void setDepartureDate(String departureDate) {
+//        try {
+//            this.departureDate = df.parse(departureDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public void setDepartureTime(String departureTime) {
+//        try {
+//            this.departureTime = tf.parse(departureTime);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    public void setArrivalDate(String arrivalDate) {
+//        try {
+//            this.arrivalDate = df.parse(arrivalDate);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public Date getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
-        try {
-            this.arrivalTime = tf.parse(arrivalTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void setArrivalTime(String arrivalTime) {
+//        try {
+//            this.arrivalTime = tf.parse(arrivalTime);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public Airline getAirline() {
         return airline;

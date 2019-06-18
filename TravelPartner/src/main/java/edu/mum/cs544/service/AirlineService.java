@@ -22,7 +22,7 @@ public class AirlineService {
     private final String singleAirlineUrl = "http://localhost:8077/api/airline/{id}";
 
     // all airlines
-    public List<Airline> getAirlines(){
+    public List<Airline> getAll(){
         ResponseEntity<List<Airline>> responseEntity =
                 restTemplate.exchange(airlineUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Airline>>() {});
 
