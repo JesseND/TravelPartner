@@ -1,6 +1,5 @@
 package edu.mum.cs544.controller;
 
-import edu.mum.cs544.bean.Airline;
 import edu.mum.cs544.bean.Airport;
 import edu.mum.cs544.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/airports")
 public class AirportController {
-
-
     @Autowired
     private AirportService airportService;
 

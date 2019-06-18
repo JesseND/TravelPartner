@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>List of all Flights</h1>
+</div>
+
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Airline</th>
+            <th>Flightnbr</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departure Date</th>
+            <th>Arrival Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="flight: ${flights}">
+            <td th:text="${flight.id}"></td>
+            <td th:text="${flight.airline.name}"></td>
+            <td th:text="${flight.flightnr}"></td>
+            <td th:text="${flight.origin.airportcode}"></td>
+            <td th:text="${flight.destination.airportcode }"></td>
+            <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy')}"></td>
+            <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy')}"></td>
+            <td><a th:href="@{/flights/{id}(id= ${flight.id})}">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary"
+            data-toggle="modal" data-target=".bd-example-modal-lg">Add Flight</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Add new Flight</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="/flights" method="post">
+                        <div class="form-group">
+                            <label for="sr">Flight nbr: </label>
+                            <input type="text" value="test" name="flightnr" class="form-control" id="sr" placeholder="Flight number">
+                        </div>
+                        <div class="form-group">
+                            <label for="ct">Dep Date: </label>
+                            <input type="date" name="departureDate" class="form-control" id="ct" placeholder="Departure Date">
+                        </div>
+                        <div class="form-group">
+                            <label for="cpty">Dep Time: </label>
+                            <input type="time" name="departureTime" class="form-control" id="cpty" placeholder="Departure Tate">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="arrD">Arr Date: </label>
+                            <input type="date" name="arrivalDate" class="form-control" id="arrD" placeholder="Arrival Date">
+                        </div>
+                        <div class="form-group">
+                            <label for="arrT">Arr Time: </label>
+                            <input type="time" name="arrivalTime" class="form-control" id="arrT" placeholder="Arrival Tate">
+                        </div>
+
+                        <label for="arl">
+                            <select name="airline"  id="arl">
+                                <option th:each="airline: ${airlines}" th:value="${airline.id}" th:text="${airline.name}"></option>
+                            </select>
+                        </label>
+
+                        <select th:name="airplane">
+                            <option th:each="airplane: ${airplanes}" th:value="${airplane.id}" th:text="${airplane.model}"></option>
+                        </select>
+
+                        <select th:name="origin">
+                            <option th:each="airport: ${airports}" th:value="${airport.id}" th:text="${airport.airportcode}"></option>
+                        </select>
+
+                        <select th:name="destination">
+                            <option th:each="airport: ${airports}" th:value="${airport.id}" th:text="${airport.airportcode}"></option>
+                        </select>
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>
