@@ -33,6 +33,13 @@ public class FlightService {
 
     }
 
+    //add new airline
+    public void addByQuery(String query) {
+        System.out.println("Add.. "+query);
+        URI uri = restTemplate.postForLocation(flightUrl, query);
+
+    }
+
     // get one airline
     public Flight getById(Long id){
         return restTemplate.getForObject(singleFlightUrl, Flight.class, id);

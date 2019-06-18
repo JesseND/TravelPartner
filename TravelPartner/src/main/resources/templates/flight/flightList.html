@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Flights</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 
@@ -23,6 +23,7 @@
             <th>Destination</th>
             <th>Departure Date</th>
             <th>Arrival Date</th>
+            <th>View</th>
         </tr>
         </thead>
         <tbody>
@@ -32,9 +33,9 @@
             <td th:text="${flight.flightnr}"></td>
             <td th:text="${flight.origin.airportcode}"></td>
             <td th:text="${flight.destination.airportcode }"></td>
-            <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy')}"></td>
-            <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy')}"></td>
-            <td><a th:href="@{/flights/{id}(id= ${flight.id})}">Edit</a></td>
+            <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.departureTime, ' HH:mm')}"></td>
+            <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.arrivalTime, ' HH:mm')}"></td>
+            <td><a th:href="@{/flights/{id}(id= ${flight.id})}">View</a></td>
         </tr>
         </tbody>
     </table>
