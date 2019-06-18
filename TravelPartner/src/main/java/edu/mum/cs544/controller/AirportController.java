@@ -35,8 +35,9 @@ public class AirportController {
         return "redirect:/airports";
     }
 
-    @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable Long id){
+        System.out.println("delete/"+ id + " --> Airport");
         airportService.delete(id);
         return "redirect:/airports";
     }

@@ -54,24 +54,33 @@ public class FlightController {
         model.addAttribute("airlines", airlines);
         model.addAttribute("airplanes", airplanes);
 
-        // System.out.println("Dep: "+flights.get(0).getDepartureDate());
-        // return "index";
+
         return "flight/flightList";
     }
 
     @GetMapping(value = "/{id}")
     public String getOne(@PathVariable Long id, Model model){
         Flight flight = flightService.getById(id);
+
+        Date arr = flight.getArrivalDate();
+        Date dep = flight.getDepartureDate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm");
+
+        // model.addAttribute("flight", flight);
+
+        // System.out.println("date arr: "+ format.format(arr));
+
+        model.addAttribute("arrDate", format.format(arr));
+        model.addAttribute("depDate", format.format(dep));
+
+        model.addAttribute("arrTime", time.format(flight.getArrivalTime()));
+        model.addAttribute("depTime", time.format(flight.getDepartureTime()));
+
         model.addAttribute("flight", flight);
         return "flight/flightDetail";
     }
-
-//    @PostMapping()
-//    public String add(FlightDTO flightDTO){
-//        //flightService.add(flight);
-//        System.out.println(flightDTO);
-//        return "redirect:/flights";
-//    }
 
     @PostMapping()
     public String add(String flightnr, String departureDate, String departureTime,
@@ -115,9 +124,11 @@ public class FlightController {
         return "redirect:/flights";
     }
 
-    @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable Long id){
+        System.out.println("/delete/"+id +" --> Flight");
         flightService.delete(id);
         return "redirect:/flights";
     }
+
 }

@@ -20,6 +20,7 @@
             <th>Model</th>
             <th>Serial Nbr</th>
             <th>View</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -29,7 +30,8 @@
             <td th:text="${airplane.capacity}"></td>
             <td th:text="${airplane.model}"></td>
             <td th:text="${airplane.serialnr}"></td>
-            <td><a th:href="@{/airplanes/{id}(id= ${airplane.id})}">View</a></td>
+            <td><a class="btn btn-warning btn-sm" th:href="@{/airplanes/{id}(id= ${airplane.id})}" >View</a></td>
+            <td><a class="btn btn-danger btn-sm" th:href="@{/airplanes/delete/{id}(id= ${airplane.id})}">Delete</a></td>
         </tr>
         </tbody>
     </table>

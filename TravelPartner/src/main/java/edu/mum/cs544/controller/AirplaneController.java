@@ -36,9 +36,10 @@ public class AirplaneController {
         return "redirect:/airplanes";
     }
 
-    @DeleteMapping(value = "/{id}")
+    @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable Long id){
         airplaneService.delete(id);
+        // System.out.println("Inside delete...");
         return "redirect:/airplanes";
     }
 }
