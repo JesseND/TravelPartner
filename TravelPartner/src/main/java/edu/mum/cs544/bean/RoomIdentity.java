@@ -4,34 +4,39 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
+@Embeddable
 public class RoomIdentity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Long roomNumber;
-	private Long hotelId;
+	private long roomNumber;
+	private long hotelId;
 
 	public RoomIdentity() {
 	}
 
-	public RoomIdentity(long roomNumber, long hotelId) {
+	public RoomIdentity(long hotelId, long roomNumber) {
 		this.roomNumber = roomNumber;
 		this.hotelId = hotelId;
 	}
 
-	public Long getRoomNumber() {
+	public long getRoomNumber() {
 		return roomNumber;
 	}
 
-	public void setRoomNumber(Long roomNumber) {
+	public void setRoomNumber(long roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 
-	public Long getHotelId() {
+	public long getHotelId() {
 		return hotelId;
 	}
 
-	public void setHotelId(Long hotelId) {
+	public void setHotelId(long hotelId) {
 		this.hotelId = hotelId;
 	}
 
+	@Override
+	public String toString() {
+		return "RoomIdentity [roomNumber=" + roomNumber + ", hotelId=" + hotelId + "]";
+	}
 }

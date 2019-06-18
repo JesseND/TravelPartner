@@ -1,23 +1,44 @@
 package edu.mum.cs544.bean;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-public class Hotel implements Serializable {
+import org.hibernate.validator.constraints.Length;
 
-	private static final long serialVersionUID = 1L;
+import java.util.List;
 
+@Entity
+public class Hotel {
+
+	@Id
+	@GeneratedValue
 	private long id;
 
+	@NotBlank
 	private String name;
-
+	@Size(min = 15, max = 2500)
 	private String description;
 
+	@NotBlank
 	private String ranking;
 
+	@NotBlank
 	private String phone;
 
+	@Min(value = 50)
 	private int capacity;
 
+	@Embedded
+	@NotNull
 	private Location location;
 
 	public Hotel() {
@@ -80,7 +101,7 @@ public class Hotel implements Serializable {
 		this.location = location;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

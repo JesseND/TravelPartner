@@ -2,10 +2,18 @@ package edu.mum.cs544.bean;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+@Entity
 public class Room implements Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	@EmbeddedId
 	private RoomIdentity roomId;
 
 	private double pricePerNight;
@@ -54,6 +62,12 @@ public class Room implements Serializable {
 
 	public void setReserved(boolean reserved) {
 		this.reserved = reserved;
+	}
+
+	@Override
+	public String toString() {
+		return "Room [roomId=" + roomId + ", pricePerNight=" + pricePerNight + ", maxPersons=" + maxPersons
+				+ ", reserved=" + reserved + "]";
 	}
 
 }
