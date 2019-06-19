@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flights</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">TravelPartner</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/bookings">Bookings</a></li>
+            <li class="active" ><a href="/flights">Flights</a></li>
+            <li><a href="/airlines">Airlines</a></li>
+            <li><a href="/airports">Airports</a></li>
+            <li><a href="/airplanes">Airplanes</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Flights from <span th:text="${origin}"></span> to <span th:text="${destination}"></span></h1>
+</div>
+
+<div th:if="${isEmpty}" class="container">
+    <h2>Sorry there are no flights from
+        <span th:text="${origin}"></span> to <span th:text="${destination}"></span></h2>
+
+</div>
+
+<div th:if="${!isEmpty}" class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Airline</th>
+            <th>Flightnbr</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Departure Date</th>
+            <th>Arrival Date</th>
+
+            <th th:if="${isLoggedIn}">Book</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="flight: ${flights}">
+            <td th:text="${flight.id}"></td>
+            <td th:text="${flight.airline.name}"></td>
+            <td th:text="${flight.flightnr}"></td>
+            <td th:text="${flight.origin.airportcode} +' '+ ${flight.origin.name}"></td>
+            <td th:text="${flight.destination.airportcode }+' '+ ${flight.destination.name}"></td>
+            <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.departureTime, ' HH:mm')}"></td>
+            <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.arrivalTime, ' HH:mm')}"></td>
+            <td th:if="${isLoggedIn}"><a class="btn btn-primary btn-sm" th:href="@{/flights/booking/{id}(id= ${flight.id})}" >Book</a></td>
+            <td><a class="btn btn-warning btn-sm" th:href="@{/flights/{id}(id= ${flight.id})}" >View</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>

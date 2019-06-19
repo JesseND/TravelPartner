@@ -149,8 +149,7 @@ public class FlightController {
         User user = (User) session.getAttribute("user");
 
         System.out.println("user in session: " + user.toString());
-
-
+        
         Booking booking = new Booking();
         booking.setActive(true);
         booking.setFlight_id(flightId);

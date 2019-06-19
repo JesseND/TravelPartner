@@ -19,10 +19,20 @@ public class FlightService {
     private final String flightUrl = "http://localhost:8077/api/flights";
     private final String singleFlightUrl = "http://localhost:8077/api/flights/{id}";
 
+
+
     // all airlines
     public List<Flight> getAll(){
         ResponseEntity<List<Flight>> responseEntity =
                 restTemplate.exchange(flightUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Flight>>() {});
+        return responseEntity.getBody();
+    }
+
+    public List<Flight> flightsByQuery(String origin, String destination){
+        String flightQuery = "http://localhost:8077/api/flights/search?origin="+ origin + "&destination="+destination;
+
+        ResponseEntity<List<Flight>> responseEntity =
+                restTemplate.exchange(flightQuery, HttpMethod.GET, null, new ParameterizedTypeReference<List<Flight>>() {});
         return responseEntity.getBody();
     }
 

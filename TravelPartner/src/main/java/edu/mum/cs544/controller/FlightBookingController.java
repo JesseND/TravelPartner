@@ -9,11 +9,9 @@ import edu.mum.cs544.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +37,43 @@ public class FlightBookingController {
         return "bookings/bookingList";
     }
 
+    /** search flights by origin and destination*/
+    @GetMapping(value = "/search")
+    public String search(){
+        System.out.println("we are searching");
+
+        return "bookings/search";
+    }
+
+    @PostMapping(value = "/search")
+    public String searchResult(HttpSession session,  @RequestParam String origin, @RequestParam String destination, Model model){
+
+        List<Flight> flightsByQuery = flightService.flightsByQuery(origin, destination);
+
+        User user = (User) session.getAttribute("user");
+
+        boolean isEmpty = true;
+        boolean isLoggedIn = false;
+
+        if(session.getAttribute("user") != null)
+            isLoggedIn = true;
+
+        if(flightsByQuery.size() > 0)
+            isEmpty = false;
+
+        model.addAttribute("isEmpty", isEmpty);
+
+        System.out.println(origin +" --> " + destination);
+
+
+        model.addAttribute("isLoggedIn", isLoggedIn);
+        model.addAttribute("origin", origin);
+        model.addAttribute("destination", destination);
+        model.addAttribute("flights", flightsByQuery);
+
+        return "flight/flightQuery";
+    }
+
     /** shows a single view of one booking*/
     @GetMapping(value = "/{id}")
     public String getOne(@PathVariable Long id, Model model){
@@ -52,10 +87,6 @@ public class FlightBookingController {
     /** shows a list of all bookings of one user*/
     @GetMapping(value = "/user/{id}")
     public String listOfBookingByUser(@PathVariable Integer id, Model model){
-        // User user = userService.getById(id);
-
-        // Long userId = (Long) id;
-
         User user = userService.get(id);
 
         List<Booking> bookings = bookingService.getAllById(id);
@@ -68,6 +99,8 @@ public class FlightBookingController {
 
         model.addAttribute("flights", flights);
         model.addAttribute("user", user);
+
+        System.out.println("/bookings/user/"+user.getId());
 
         return "bookings/bookingDetail";
     }
