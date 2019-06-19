@@ -38,7 +38,7 @@ public class UserController {
 //        model.addAttribute("userId", userLoggedIn.getId());
 //        model.addAttribute("userName", userLoggedIn.getName());
 //        model.addAttribute("userRole", userLoggedIn.getRole().toString());
-        return "user/mainPage";
+        return "redirect:/bookings/user/"+userLoggedIn.getId();
     }
 
     @GetMapping("/user/register")

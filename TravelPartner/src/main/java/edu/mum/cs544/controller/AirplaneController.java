@@ -28,6 +28,10 @@ public class AirplaneController {
         String role = user.getRole().toString();
         System.out.println("role--> "+role);
 
+        boolean isAdmin = true;
+
+        model.addAttribute("isAdmin", isAdmin);
+
         model.addAttribute("airplanes", airplanes);
         return "airplane/airplaneList";
     }
@@ -52,7 +56,6 @@ public class AirplaneController {
     @RequestMapping(value = "/delete/{id}")
     public String delete(@PathVariable Long id){
         airplaneService.delete(id);
-        // System.out.println("Inside delete...");
         return "redirect:/airplanes";
     }
 }

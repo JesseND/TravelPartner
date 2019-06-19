@@ -7,43 +7,57 @@
 </head>
 
 <body>
-<div th:replace="fragments/dashboard_nav :: main-nav">>
+<div th:if="${user.getRole().toString().equals('USER')}">
+    <div th:replace="fragments/normalUser_nav :: main-nav">
+    </div>
 </div>
 
-<div class="container">
-
-    <h1 >List of all Flights by <span th:text="${user.name}"></span></h1>
+<div th:if="${user.getRole().toString().equals('ADMIN')}" >
+    <div  th:replace="fragments/dashboard_nav :: main-nav">
+    </div>
 </div>
 
-<div class="container">
-
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Airline</th>
-            <th>Flightnbr</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Departure Date</th>
-            <th>Arrival Date</th>
-            <th>Aircraft</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="flight: ${flights}">
-            <td th:text="${flight.id}"></td>
-            <td th:text="${flight.airline.name}"></td>
-            <td th:text="${flight.flightnr}"></td>
-            <td th:text="${flight.origin.airportcode} +' '+ ${flight.origin.name}"></td>
-            <td th:text="${flight.destination.airportcode }+' '+ ${flight.destination.name}"></td>
-            <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.departureTime, ' HH:mm')}"></td>
-            <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.arrivalTime, ' HH:mm')}"></td>
-            <td th:text="${flight.airplane.model}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div th:if="${!noBooking}" class="container">
+    <h1 >There are no current bookings, <a href="/bookings/search">Search flights</a> </h1>
 </div>
+
+<div th:if="${noBooking}">
+    <div class="container">
+
+        <h1 >List of all Bookings by <span th:text="${user.name}"></span></h1>
+    </div>
+
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Airline</th>
+                <th>Flightnbr</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Departure Date</th>
+                <th>Arrival Date</th>
+                <th>Aircraft</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="flight: ${flights}">
+                <td th:text="${flight.id}"></td>
+                <td th:text="${flight.airline.name}"></td>
+                <td th:text="${flight.flightnr}"></td>
+                <td th:text="${flight.origin.airportcode} +' '+ ${flight.origin.name}"></td>
+                <td th:text="${flight.destination.airportcode }+' '+ ${flight.destination.name}"></td>
+                <td th:text="${#dates.format(flight.departureDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.departureTime, ' HH:mm')}"></td>
+                <td th:text="${#dates.format(flight.arrivalDate, 'MMM dd,yyyy ')} + ${#dates.format(flight.arrivalTime, ' HH:mm')}"></td>
+                <td th:text="${flight.airplane.model}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
