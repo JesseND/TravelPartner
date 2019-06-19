@@ -144,23 +144,21 @@ public class FlightController {
 
     /*book a flight with of that id*/
     @GetMapping(value = "/booking/{flightId}")
-    public String book(@PathVariable long flightId, HttpSession session){
+    public String book(@PathVariable long flightId, HttpSession session, Model model) {
 
-        String user = (String) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
 
-        String userId = "1";
+        System.out.println("user in session: " + user.toString());
 
-        if(user == null || user.isEmpty()){
-            userId = "2";
-        }
+
         Booking booking = new Booking();
         booking.setActive(true);
         booking.setFlight_id(flightId);
-        booking.setUser_id(Long.parseLong(userId));
+        booking.setUser_id(user.getId());
 
         bookingService.add(booking);
 
-        return "redirect:/bookings/user/"+userId;
+        return "redirect:/bookings/user/" + user.getId();
     }
 
 

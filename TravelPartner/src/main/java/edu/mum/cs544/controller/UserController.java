@@ -9,11 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@SessionAttributes(value={"userId", "name", "userRole"})
+//@SessionAttributes(value={"userId", "name", "userRole"})
 public class UserController {
 
     @Autowired
@@ -30,11 +31,13 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
-    public String processLogin(User user, Model model){
+    public String processLogin(User user, Model model, HttpSession session){
         User userLoggedIn = userService.userLogIn(user.getUsername(), user.getPassword());
-        model.addAttribute("userId", userLoggedIn.getId());
-        model.addAttribute("userName", userLoggedIn.getName());
-        model.addAttribute("userRole", userLoggedIn.getRole().toString());
+
+        session.setAttribute("user", userLoggedIn);
+//        model.addAttribute("userId", userLoggedIn.getId());
+//        model.addAttribute("userName", userLoggedIn.getName());
+//        model.addAttribute("userRole", userLoggedIn.getRole().toString());
         return "user/mainPage";
     }
 
