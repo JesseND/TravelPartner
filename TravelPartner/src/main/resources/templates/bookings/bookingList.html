@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Airlines</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">TravelPartner</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active" ><a href="/bookings">Bookings</a></li>
+            <li><a href="/flights">Flights</a></li>
+            <li><a href="/airlines">Airlines</a></li>
+            <li><a href="/airports">Airports</a></li>
+            <li><a href="/airplanes">Airplanes</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>List of all Bookings by -- user name --</h1>
+</div>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Flight Id</th>
+            <th>User Id</th>
+            <th>Is Active</th>
+            <th>View</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="booking: ${bookings}">
+            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.flight_id}"></td>
+            <td th:text="${booking.user_id}"></td>
+            <td th:text="${booking.isActive()}"></td>
+            <td><a class="btn btn-warning btn-sm" th:href="@{/bookings/{id}(id= ${booking.id})}" >View</a></td>
+            <td><a class="btn btn-danger btn-sm" th:href="@{/bookings/delete/{id}(id= ${booking.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
+</html>

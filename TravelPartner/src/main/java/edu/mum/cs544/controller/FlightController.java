@@ -1,19 +1,14 @@
 package edu.mum.cs544.controller;
 
 
-import edu.mum.cs544.bean.Airline;
-import edu.mum.cs544.bean.Airplane;
-import edu.mum.cs544.bean.Airport;
-import edu.mum.cs544.bean.Flight;
-import edu.mum.cs544.service.AirlineService;
-import edu.mum.cs544.service.AirplaneService;
-import edu.mum.cs544.service.AirportService;
-import edu.mum.cs544.service.FlightService;
+import edu.mum.cs544.bean.*;
+import edu.mum.cs544.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +30,9 @@ public class FlightController {
 
     @Autowired
     private AirplaneService airplaneService;
+
+    @Autowired
+    private FlightBookingService bookingService;
 
     private DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,
             Locale.US);
@@ -142,6 +140,27 @@ public class FlightController {
         flightService.update(flight);
         // add id to html form as hidden
         return "redirect:/flights";
+    }
+
+    /*book a flight with of that id*/
+    @GetMapping(value = "/booking/{flightId}")
+    public String book(@PathVariable long flightId, HttpSession session){
+
+        String user = (String) session.getAttribute("user");
+
+        String userId = "1";
+
+        if(user == null || user.isEmpty()){
+            userId = "2";
+        }
+        Booking booking = new Booking();
+        booking.setActive(true);
+        booking.setFlight_id(flightId);
+        booking.setUser_id(Long.parseLong(userId));
+
+        bookingService.add(booking);
+
+        return "redirect:/bookings/user/"+userId;
     }
 
 
