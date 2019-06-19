@@ -8,7 +8,7 @@
 <!--    <script th:src="@{/resource/js/checkToken.js}"></script>-->
 </head>
 <body>
-     <div th:replace="fragments/dashboard_nav :: main-nav">>
+     <div th:replace="fragments/dashboard_nav :: main-nav" th:with="currentUSer=${@user}">
     </div>
 </body>
 </html>

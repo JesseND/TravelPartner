@@ -8,17 +8,17 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Welcome <span th:text="${user.getName()}"></span> </a>
+                <a class="navbar-brand" href="#">Welcome <span th:text="${currentUser.getName()}"></span> </a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/bookings">Bookings</a></li>
 
-                <li><a href="/flights">Flights</a></li>
-                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airlines">Airlines</a></li>
-                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airports">Airports</a></li>
-                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airplanes">Airplanes</a></li>
-                <li><a th:href="@{/user/update/{id} (id=${user.getId()})}">Update Profile</a></li>
-                <li><a th:href="@{/user/login}">Logo out</a></li>
+<!--                <li><a href="/flights">Flights</a></li>-->
+<!--                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airlines">Airlines</a></li>-->
+<!--                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airports">Airports</a></li>-->
+<!--                <li><a th:if="${user.getRole().toString() == 'ADMIN'}" href="/airplanes">Airplanes</a></li>-->
+<!--                <li><a th:href="@{/user/update/{id} (id=${user.getId()})}">Update Profile</a></li>-->
+<!--                <li><a th:href="@{/user/login}">Logo out</a></li>-->
             </ul>
         </div>
     </nav>

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-//@SessionAttributes(value={"userId", "name", "userRole"})
+//@SessionAttributes(value={"user"})
 public class UserController {
 
     @Autowired
@@ -23,6 +23,11 @@ public class UserController {
 //    @GetMapping("/")
 //    public String goToLogIn(){
 //
+//    }
+
+//    @ModelAttribute("user")
+//    public User user() {
+//        return new User();
 //    }
 
     @GetMapping(value = {"/","user/login"})
