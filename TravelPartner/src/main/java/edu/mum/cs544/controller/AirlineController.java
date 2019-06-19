@@ -45,5 +45,4 @@ public class AirlineController {
         airlineService.delete(id);
         return "redirect:/airlines";
     }
-
 }
