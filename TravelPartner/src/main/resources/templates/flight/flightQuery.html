@@ -11,15 +11,8 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">TravelPartner</a>
+            <a class="navbar-brand" href="/bookings/search">TravelPartner</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="/bookings">Bookings</a></li>
-            <li class="active" ><a href="/flights">Flights</a></li>
-            <li><a href="/airlines">Airlines</a></li>
-            <li><a href="/airports">Airports</a></li>
-            <li><a href="/airplanes">Airplanes</a></li>
-        </ul>
     </div>
 </nav>
 
@@ -30,10 +23,13 @@
 <div th:if="${isEmpty}" class="container">
     <h2>Sorry there are no flights from
         <span th:text="${origin}"></span> to <span th:text="${destination}"></span></h2>
+    <h2> <a href="/bookings/search"> Search again</a></h2>
 
 </div>
 
 <div th:if="${!isEmpty}" class="container">
+
+    <h2 th:if="${!isLoggedIn}" ><a href="/">Log in </a> to book this flight</h2>
 
     <table class="table table-striped">
         <thead>

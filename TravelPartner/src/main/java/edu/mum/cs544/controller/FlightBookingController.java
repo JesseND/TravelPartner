@@ -70,6 +70,8 @@ public class FlightBookingController {
         System.out.println(origin +" --> " + destination);
 
 
+        model.addAttribute("user", user);
+
         model.addAttribute("isLoggedIn", isLoggedIn);
         model.addAttribute("origin", origin);
         model.addAttribute("destination", destination);
@@ -95,7 +97,12 @@ public class FlightBookingController {
     public String listOfBookingByUser(@PathVariable Integer id, Model model){
         User user = userService.get(id);
 
+        boolean noBooking = false;
+
         List<Booking> bookings = bookingService.getAllById(id);
+
+        if(bookings.size() > 0)
+            noBooking = true;
 
         List<Flight> flights = new ArrayList<>();
 
@@ -103,6 +110,7 @@ public class FlightBookingController {
             flights.add(flightService.getById(b.getFlight_id()));
         }
 
+        model.addAttribute("noBooking", noBooking);
         model.addAttribute("flights", flights);
         model.addAttribute("user", user);
 
