@@ -7,23 +7,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@SessionAttributes(value={"userId", "name"})
+@SessionAttributes(value={"userId", "name", "userRole"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public String goToLogIn(){
-        return "redirect:/user/login";
-    }
+//    @GetMapping("/")
+//    public String goToLogIn(){
+//
+//    }
 
-    @GetMapping("user/login")
+    @GetMapping(value = {"/","user/login"})
     public String showLoginForm(@ModelAttribute("user") User user) {
         return "user/loginForm";
     }
@@ -33,6 +34,7 @@ public class UserController {
         User userLoggedIn = userService.userLogIn(user.getUsername(), user.getPassword());
         model.addAttribute("userId", userLoggedIn.getId());
         model.addAttribute("userName", userLoggedIn.getName());
+        model.addAttribute("userRole", userLoggedIn.getRole().toString());
         return "user/mainPage";
     }
 
@@ -46,6 +48,7 @@ public class UserController {
             User registeredUser = userService.registerUser(user);
             model.addAttribute("userId", registeredUser.getId());
             model.addAttribute("userName", registeredUser.getName());
+            model.addAttribute("userRole", registeredUser.getRole().toString());
             return "user/mainPage";
     }
 
@@ -74,10 +77,17 @@ public class UserController {
 //        return "deleteUserForm";
 //    }
 
-    @PostMapping(value = "user/delete/{id}")
+    @PostMapping(value = "/user/delete/{id}")
     public String delete(@PathVariable Integer id){
         userService.delete(id);
         return "redirect:/users";
+    }
+
+    @GetMapping(value = "/user/logout")
+    public String logout(SessionStatus sessionStatus){
+
+        sessionStatus.setComplete();
+        return "loginForm";
     }
 
 }
