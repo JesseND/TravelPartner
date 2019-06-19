@@ -8,7 +8,16 @@
 <!--    <script th:src="@{/resource/js/checkToken.js}"></script>-->
 </head>
 <body>
-     <div th:replace="fragments/dashboard_nav :: main-nav" th:with="currentUSer=${@user}">
+
+<div th:if="${user.getRole().toString().equals('USER')}">
+    <div th:replace="fragments/normalUser_nav :: main-nav">
     </div>
+</div>
+
+<div th:if="${user.getRole().toString().equals('ADMIN')}" >
+    <div  th:replace="fragments/dashboard_nav :: main-nav">
+    </div>
+</div>
+
 </body>
 </html>

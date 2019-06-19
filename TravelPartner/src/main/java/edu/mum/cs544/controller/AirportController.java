@@ -1,12 +1,14 @@
 package edu.mum.cs544.controller;
 
 import edu.mum.cs544.bean.Airport;
+import edu.mum.cs544.bean.User;
 import edu.mum.cs544.service.AirportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -16,15 +18,19 @@ public class AirportController {
     private AirportService airportService;
 
     @GetMapping()
-    public String allAirports(Model model){
+    public String allAirports(Model model, HttpSession session){
         List<Airport> airports = airportService.getAll();
         model.addAttribute("airports", airports);
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "airport/airportList";
     }
 
     @GetMapping(value = "/{id}")
-    public String getOne(@PathVariable Long id, Model model){
+    public String getOne(@PathVariable Long id, Model model, HttpSession session){
         Airport airport = airportService.getById(id);
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
         model.addAttribute("airport", airport);
         return "airport/airportDetail";
     }

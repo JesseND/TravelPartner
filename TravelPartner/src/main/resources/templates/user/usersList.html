@@ -12,8 +12,16 @@
 
 </head>
 <body>
-<div th:replace="fragments/dashboard_nav :: main-nav">>
+<div th:if="${user.getRole().toString().equals('USER')}">
+    <div th:replace="fragments/normalUser_nav :: main-nav">
+    </div>
 </div>
+
+<div th:if="${user.getRole().toString().equals('ADMIN')}" >
+    <div  th:replace="fragments/dashboard_nav :: main-nav">
+    </div>
+</div>
+
 <h1>Users List</h1>
 
 <table class="table" id = "users-table">
