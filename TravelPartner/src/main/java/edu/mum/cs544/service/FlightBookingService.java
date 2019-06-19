@@ -30,7 +30,7 @@ public class FlightBookingService {
         return responseEntity.getBody();
     }
 
-    public List<Booking> getAllById(Long id){
+    public List<Booking> getAllById(int id){
         ResponseEntity<List<Booking>> responseEntity =
                 restTemplate.exchange(bookingUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<Booking>>() {});
         return responseEntity.getBody()
