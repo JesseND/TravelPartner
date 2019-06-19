@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-<div th:replace="fragments/dashboard_nav :: main-nav">>
+
+<div th:if="${user.getRole().toString().equals('USER') }" th:replace="fragments/normalUser_nav :: user-nav">
+
+</div>
+
+<div th:if="${user.getRole().toString().equals('ADMIN')}" th:replace="fragments/dashboard_nav :: main-nav">
 </div>
 
 <div class="container">

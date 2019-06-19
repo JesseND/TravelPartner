@@ -30,10 +30,14 @@ public class FlightBookingController {
     private UserService userService;
 
     @GetMapping()
-    public String allAirlines(Model model){
+    public String allAirlines(Model model, HttpSession session){
         List<Booking> bookings = bookingService.getAll();
 
         model.addAttribute("bookings", bookings);
+
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+
         return "bookings/bookingList";
     }
 
@@ -76,11 +80,13 @@ public class FlightBookingController {
 
     /** shows a single view of one booking*/
     @GetMapping(value = "/{id}")
-    public String getOne(@PathVariable Long id, Model model){
+    public String getOne(@PathVariable Long id, Model model, HttpSession session){
         Booking booking = bookingService.getById(id);
 
         long flightId = booking.getFlight_id();
         model.addAttribute("booking", booking);
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "redirect:/flights/"+flightId;
     }
 
