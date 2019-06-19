@@ -8,9 +8,10 @@
 </head>
 <body>
     <h1>The Main Page</h1>
-    <p id="salutation">Welcome <span th:text="${userName}"></span> </p>
+    <p id="salutation">Welcome <span th:text="${userName}"></span> You are  <span th:text="${userRole}"></span> </p>
     <a  th:href="@{/users/login}">Log out</a>
-    <a id = "linkToTheUsers" th:href="@{/users}">Users</a>
+    <a th:if="${userRole == 'ADMIN'}" id = "linkToTheUsers" th:href="@{/users}">Users</a>
     <a th:href="@{/user/update/{id} (id=${userId})}">Update Profile</a>
+    <a th:href="@{/user/login}">Logout</a>
 </body>
 </html>
