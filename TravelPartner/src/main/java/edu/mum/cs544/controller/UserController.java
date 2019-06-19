@@ -35,6 +35,7 @@ public class UserController {
         User userLoggedIn = userService.userLogIn(user.getUsername(), user.getPassword());
 
         session.setAttribute("user", userLoggedIn);
+        model.addAttribute("user", userLoggedIn);
 //        model.addAttribute("userId", userLoggedIn.getId());
 //        model.addAttribute("userName", userLoggedIn.getName());
 //        model.addAttribute("userRole", userLoggedIn.getRole().toString());
