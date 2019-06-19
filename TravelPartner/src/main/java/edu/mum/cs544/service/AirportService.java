@@ -30,11 +30,10 @@ public class AirportService {
         return responseEntity.getBody();
     }
 
-    //add new airline
+    //add new airline -- or update
     public void add(Airport airport) {
         System.out.println("Add.."+airport.toString());
         URI uri = restTemplate.postForLocation(airportUrl, airport);
-
     }
 
     // get one airline

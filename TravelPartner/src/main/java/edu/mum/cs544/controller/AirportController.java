@@ -41,4 +41,12 @@ public class AirportController {
         airportService.delete(id);
         return "redirect:/airports";
     }
+
+    @PostMapping(value = "/{id}")
+    public String update(@ModelAttribute("airport") Airport airport){
+        System.out.println("updating .. "+ airport);
+        airportService.add(airport);
+        return "redirect:/airports";
+    }
+
 }
