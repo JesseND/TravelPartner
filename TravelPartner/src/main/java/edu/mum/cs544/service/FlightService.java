@@ -29,16 +29,14 @@ public class FlightService {
     //add new airline
     public void add(Flight flight) {
         System.out.println("Add.."+flight.toString());
+        // restTemplate.
         URI uri = restTemplate.postForLocation(flightUrl, flight);
-
     }
 
-//    //add new airline
-//    public void addByQuery(String query) {
-//        System.out.println("Add.. "+query);
-//        URI uri = restTemplate.postForLocation(flightUrl, query);
-//
-//    }
+
+    public void update(Flight flight) {
+        restTemplate.put(singleFlightUrl, flight, flight.getId());
+    }
 
     // get one airline
     public Flight getById(Long id){

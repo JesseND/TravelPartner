@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- Template Definition -->
+	<definition name="template-def"
+		template="/WEB-INF/jsp/views/pages/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<!-- Main Page -->
+	<definition name="home" extends="template-def">
+		<put-attribute name="title" value="Welcome" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/home.jsp" />
+	</definition>
+
+	<!-- Add Hotel Page -->
+	<definition name="addHotelForm" extends="template-def">
+		<put-attribute name="title" value="Add a Hotel" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/addHotelForm.jsp" />
+	</definition>
+
+	<!-- Add Hotel Room -->
+	<definition name="addHotelRoomForm" extends="template-def">
+		<put-attribute name="title" value="Add Hotel Room" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/addHotelRoomForm.jsp" />
+	</definition>
+
+	<!-- Delete Hotel Page -->
+	<definition name="deleteHotelForm" extends="template-def">
+		<put-attribute name="title" value="Delete Confirmation" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/deleteHotelForm.jsp" />
+	</definition>
+
+	<!-- Hotel Details -->
+	<definition name="hotelDetails" extends="template-def">
+		<put-attribute name="title" value="Hotel Details" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/hotelDetails.jsp" />
+	</definition>
+
+	<!-- Hotel Rooms -->
+	<definition name="hotelRooms" extends="template-def">
+		<put-attribute name="title" value="Hotel Rooms" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/hotelRooms.jsp" />
+	</definition>
+
+	<!-- Hotel List -->
+	<definition name="hotelsList" extends="template-def">
+		<put-attribute name="title" value="Hotels List" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/hotelsList.jsp" />
+	</definition>
+
+	<!-- Reserve Room Form -->
+	<definition name="reservationRoomForm"  extends="template-def">
+		<put-attribute name="title" value="Reserve a Room" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/reservationRoomForm.jsp" />
+	</definition>
+
+	<!-- Reserve Confirmation -->
+	<definition name="reserveConfirmation"
+		extends="template-def">
+		<put-attribute name="title"
+			value="Reserve Room Confirmation" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/reserveConfirmation.jsp" />
+	</definition>
+
+
+	<!-- Search Hotel Form -->
+	<definition name="searchHotel" extends="template-def">
+		<put-attribute name="title" value="Search Hotel(s)" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/searchHotel.jsp" />
+	</definition>
+
+	<!-- Update Hotel Page -->
+	<definition name="updateHotelForm" extends="template-def">
+		<put-attribute name="title" value="Update Hotel" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/views/pages/updateHotelForm.jsp" />
+	</definition>
+
+
+
+	<!-- Update Retreat Form -->
+	<!-- <definition name="updateCheck" extends="template-def"> <put-attribute 
+		name="title" value="Update Check Form" /> <put-attribute name="body" value="/WEB-INF/views/pages/updateCheck.jsp" 
+		/> </definition> -->
+
+	<!-- Student TM Attendance Report Form -->
+	<!-- <definition name="studentReport" extends="template-def"> <put-attribute 
+		name="title" value="TM Attendance Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/studentReport.jsp" 
+		/> </definition> -->
+
+	<!-- BLockForm File -->
+	<!-- <definition name="block" extends="template-def"> <put-attribute name="title" 
+		value="Block Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/block.jsp" 
+		/> </definition> -->
+
+	<!-- BLockForm File -->
+	<!-- <definition name="entryForm" extends="template-def"> <put-attribute 
+		name="title" value="Block Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/entryForm.jsp" 
+		/> </definition> -->
+
+
+	<!-- BLockForm File -->
+	<!-- <definition name="entry" extends="template-def"> <put-attribute name="title" 
+		value="Block Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/entry.jsp" 
+		/> </definition> -->
+
+	<!-- Retreat Report -->
+	<!-- <definition name="retreatReport" extends="template-def"> <put-attribute 
+		name="title" value="Block Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/retreatReport.jsp" 
+		/> </definition> -->
+
+	<!-- TM Checking Report -->
+	<!-- <definition name="tmCheckingReport" extends="template-def"> <put-attribute 
+		name="title" value="Block Report" /> <put-attribute name="body" value="/WEB-INF/views/pages/tmCheckingReport.jsp" 
+		/> </definition> -->
+
+
+</tiles-definitions>
