@@ -41,7 +41,7 @@ public class FlightController {
             Locale.US);
 
     @GetMapping()
-    public String allAirports(Model model) {
+    public String allAirports(Model model, HttpSession session) {
         List<Flight> flights = flightService.getAll();
         List<Airport> airports = airportService.getAll();
         List<Airline> airlines = airlineService.getAll();
@@ -52,12 +52,14 @@ public class FlightController {
         model.addAttribute("airlines", airlines);
         model.addAttribute("airplanes", airplanes);
 
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
 
         return "flight/flightList";
     }
 
     @GetMapping(value = "/{id}")
-    public String getOne(@PathVariable Long id, Model model) {
+    public String getOne(@PathVariable Long id, Model model, HttpSession session) {
         Flight flight = flightService.getById(id);
 
         Date arr = flight.getArrivalDate();
@@ -77,6 +79,9 @@ public class FlightController {
         // model.addAttribute("flight", flight);
 
         // System.out.println("date arr: "+ format.format(arr));
+
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
 
         model.addAttribute("arrDate", format.format(arr));
         model.addAttribute("depDate", format.format(dep));
