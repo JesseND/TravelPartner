@@ -2,8 +2,10 @@ package edu.mum.cs544.controller;
 
 import edu.mum.cs544.bean.Booking;
 import edu.mum.cs544.bean.Flight;
+import edu.mum.cs544.bean.User;
 import edu.mum.cs544.service.FlightBookingService;
 import edu.mum.cs544.service.FlightService;
+import edu.mum.cs544.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,9 @@ public class FlightBookingController {
     @Autowired
     private FlightService flightService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping()
     public String allAirlines(Model model){
         List<Booking> bookings = bookingService.getAll();
@@ -46,9 +51,12 @@ public class FlightBookingController {
 
     /** shows a list of all bookings of one user*/
     @GetMapping(value = "/user/{id}")
-    public String listOfBookingByUser(@PathVariable Long id, Model model){
+    public String listOfBookingByUser(@PathVariable Integer id, Model model){
         // User user = userService.getById(id);
 
+        // Long userId = (Long) id;
+
+        User user = userService.get(id);
 
         List<Booking> bookings = bookingService.getAllById(id);
 
@@ -59,6 +67,7 @@ public class FlightBookingController {
         }
 
         model.addAttribute("flights", flights);
+        model.addAttribute("user", user);
 
         return "bookings/bookingDetail";
     }
