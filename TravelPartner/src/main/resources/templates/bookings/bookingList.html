@@ -9,21 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
 <body>
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">TravelPartner</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active" ><a href="/bookings">Bookings</a></li>
-            <li><a href="/flights">Flights</a></li>
-            <li><a href="/airlines">Airlines</a></li>
-            <li><a href="/airports">Airports</a></li>
-            <li><a href="/airplanes">Airplanes</a></li>
-        </ul>
-    </div>
-</nav>
+<div th:replace="fragments/dashboard_nav :: main-nav">>
+</div>
 
 <div class="container">
     <h1>List of all Bookings by -- user name --</h1>
