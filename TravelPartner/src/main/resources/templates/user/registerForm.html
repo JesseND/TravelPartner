@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <title>Register Form</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!--    <script th:src="@{/resource/js/register.js}" type="text/javascript"></script>-->
+    <link th:href="@{/resource/css/login.css}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body class="text-center">
+
+<form class="form-signin" th:object="${user}" th:action="@{/user/register}" method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign Up</h1>
+
+    <div class="form-group">
+        <span id="nameError" style="color: red"> </span>
+        <label for="name" class="sr-only">Name</label>
+        <input type="text" th:field="*{name}" id="name" name="name" class="form-control" placeholder="Name">
+<!--        <span style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br>-->
+
+    </div>
+
+    <div class="form-group">
+        <span id="emailError" style="color: red"> </span>
+        <label for="email" class="sr-only">Email</label>
+        <input type="text" th:field="*{email}" id="email" class="form-control" name="email" placeholder="Email">
+<!--        <span style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br>-->
+    </div>
+
+    <div class="form-group">
+        <span id="existingUserError" style="color: red"> </span>
+        <span id="usernameError" style="color: red"> </span>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" th:field="*{username}" id="username" name="username" class="form-control" placeholder="Username">
+<!--        <span style="color: red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span><br>-->
+    </div>
+
+    <div class="form-group">
+        <span id="passwordError" style="color: red"> </span>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" th:field="*{password}" id="password" name="password" class="form-control" placeholder="Password">
+        <!--    <span th:if="${#fields.hasErrors('username')}" th:errors="*{password}"></span><br>-->
+<!--        <span style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br>-->
+    </div>
+    <button id="btnRegister" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    <p>Already Have an Account?</p>
+    <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="button">Sign In</button>
+
+</form>
+</body>
+</html>

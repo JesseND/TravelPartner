@@ -21,6 +21,7 @@ public class AirlineService {
     private final String airlineUrl = "http://localhost:8077/api/airline";
     private final String singleAirlineUrl = "http://localhost:8077/api/airline/{id}";
 
+
     // all airlines
     public List<Airline> getAll(){
         ResponseEntity<List<Airline>> responseEntity =
@@ -33,7 +34,6 @@ public class AirlineService {
     public void add(Airline airline) {
         System.out.println("Add.."+airline.toString());
         URI uri = restTemplate.postForLocation(airlineUrl, airline);
-
     }
 
     // get one airline
