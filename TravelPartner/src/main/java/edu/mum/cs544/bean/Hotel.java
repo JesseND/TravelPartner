@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
-@Entity
+
 public class Hotel {
 
 	private long id;
