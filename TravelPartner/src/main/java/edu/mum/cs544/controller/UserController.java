@@ -25,7 +25,15 @@ public class UserController {
 //    }
 
     @GetMapping(value = {"/", "user/login"})
-    public String showLoginForm(@ModelAttribute("user") User user) {
+    public String showLoginForm(@ModelAttribute("user") User user, HttpSession session) {
+
+        if(session.getAttribute("user") != null){
+            User user1 = (User) session.getAttribute("user");
+
+            return "redirect:/bookings/user/"+user1.getId();
+        }
+
+
         return "th_user/loginForm";
     }
 

@@ -55,7 +55,7 @@ public class FlightController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        return "flight/flightList";
+        return "th_flight/flightList";
     }
 
     @GetMapping(value = "/{id}")
