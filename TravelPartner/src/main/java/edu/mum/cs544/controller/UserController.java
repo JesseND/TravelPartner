@@ -7,41 +7,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+//@SessionAttributes(value={"userId", "name", "userRole"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+//    @GetMapping("/")
+//    public String goToLogIn(){
+//
+//    }
+
     @GetMapping(value = {"/", "user/login"})
-    public String showLoginForm(@ModelAttribute("user") User user) {
+    public String showLoginForm(@ModelAttribute("user") User user, HttpSession session) {
+
+        if(session.getAttribute("user") != null){
+            User user1 = (User) session.getAttribute("user");
+
+            return "redirect:/bookings/user/"+user1.getId();
+        }
+
+
         return "th_user/loginForm";
     }
 
     @PostMapping("/user/login")
-    public String processLogin(User user, Model model, HttpSession session, RedirectAttributes att) {
+    public String processLogin(User user, Model model, HttpSession session) {
         User userLoggedIn = userService.userLogIn(user.getUsername(), user.getPassword());
 
-        if (userLoggedIn==null){
-            att.addFlashAttribute("error","No User for these Credentials");
-            return "redirect:/user/login";
-
-        }else {
-            session.setAttribute("user", userLoggedIn);
-            model.addAttribute("user", userLoggedIn);
+        session.setAttribute("user", userLoggedIn);
+        model.addAttribute("user", userLoggedIn);
 //        model.addAttribute("userId", userLoggedIn.getId());
 //        model.addAttribute("userName", userLoggedIn.getName());
 //        model.addAttribute("userRole", userLoggedIn.getRole().toString());
-            return "redirect:/bookings/user/" + userLoggedIn.getId();
-        }
+        return "redirect:/bookings/user/"+userLoggedIn.getId();
     }
 
     @GetMapping("/user/register")
@@ -49,12 +54,10 @@ public class UserController {
         return "th_user/registerForm";
     }
 
-    @PostMapping("/user/register")
-    public String processRegisterForm(@Valid User user, BindingResult result, Model model, HttpSession session) {
 
-        if (result.hasErrors()){
-            return "th_user/registerForm";
-        }
+    /** redirect*/
+    @PostMapping("/user/register")
+    public String processRegisterForm(User user, Model model, HttpSession session) {
         User registeredUser = userService.registerUser(user);
 
         model.addAttribute("user", registeredUser);
@@ -74,7 +77,7 @@ public class UserController {
     public String allUsers(Model model, HttpSession session) {
         List<User> users = userService.getAll();
 
-        User user = (User) session.getAttribute("th_user");
+        User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
 
         model.addAttribute("users", users);
@@ -96,6 +99,11 @@ public class UserController {
         userService.update(user);
         return "th_user/mainPage";
     }
+//    @GetMapping("/users/delete/{id}")
+//    public String showDeleteForm(@PathVariable int id, Model model) {
+//        //model.addAttribute("user", userService.find(id));
+//        return "deleteUserForm";
+//    }
 
     @PostMapping(value = "/user/delete/{id}")
     public String delete(@PathVariable Integer id) {
@@ -105,7 +113,7 @@ public class UserController {
 
     @GetMapping(value = "/user/logout")
     public String logout(HttpSession session) {
-        // session.removeAttribute("th_user");
+        // session.removeAttribute("user");
         session.invalidate();
         return "th_user/loginForm";
     }

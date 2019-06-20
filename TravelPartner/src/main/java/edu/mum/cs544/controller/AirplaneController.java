@@ -33,7 +33,7 @@ public class AirplaneController {
         model.addAttribute("isAdmin", isAdmin);
 
         model.addAttribute("airplanes", airplanes);
-        return "airplane/airplaneList";
+        return "th_airplane/airplaneList";
     }
 
     @GetMapping(value = "/{id}")
@@ -44,7 +44,7 @@ public class AirplaneController {
         User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
-        return "airplane/airplaneDetail";
+        return "th_airplane/airplaneDetail";
     }
 
     @PostMapping()

@@ -23,7 +23,7 @@ public class AirportController {
         model.addAttribute("airports", airports);
         User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
-        return "airport/airportList";
+        return "th_airport/airportList";
     }
 
     @GetMapping(value = "/{id}")
@@ -32,7 +32,7 @@ public class AirportController {
         User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         model.addAttribute("airport", airport);
-        return "airport/airportDetail";
+        return "th_airport/airportDetail";
     }
 
     @PostMapping()

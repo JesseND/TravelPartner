@@ -1,8 +1,5 @@
 package edu.mum.cs544.bean;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Location {
 
 	private String country;

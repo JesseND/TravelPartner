@@ -1,7 +1,7 @@
 package edu.mum.cs544.service;
 
-import edu.mum.cs544.bean.Hotel;
 import edu.mum.cs544.bean.Room;
+import edu.mum.cs544.bean.RoomIdentity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -21,7 +21,7 @@ public class RoomService {
 
 	private final String roomsUrl = "http://localhost:8089/hotel/api/{id}/rooms";
 	private final String roomAddUrl = "http://localhost:8089/hotel/room/api/add";
-	// private final String singleHotelUrl = "http://localhost:8089/hotel/api/{id}";
+	private final String getRoomByIdentityUrl = "http://localhost:8089/hotel/room/api/find/{hotelId}/{roomNumber}";
 	private final String roomUpdateUrl = "http://localhost:8089/hotel/api/update/{id}";
 
 	// all Rooms
@@ -35,7 +35,6 @@ public class RoomService {
 
 	// add new room
 	public void saveRoom(Room room) {
-		// System.out.println("Add.." + hotel.toString());
 		URI uri = restTemplate.postForLocation(roomAddUrl, room);
 	}
 
@@ -44,13 +43,8 @@ public class RoomService {
 		restTemplate.put(roomUpdateUrl, room, id);
 	}
 
-//	// get one hotel
-//	public Hotel getOne(Long id) {
-//		return restTemplate.getForObject(singleHotelUrl, Hotel.class, id);
-//	}
-
-// delete hotel
-//	public void delete(Long id) {
-//		restTemplate.delete(singleHotelUrl, id);
-//	}
+	// get Room by Identity
+	public Room getRoomByIdentity(long hotelId, long roomNumber) {
+		return  restTemplate.getForObject(getRoomByIdentityUrl, Room.class, hotelId, roomNumber);
+	}
 }
