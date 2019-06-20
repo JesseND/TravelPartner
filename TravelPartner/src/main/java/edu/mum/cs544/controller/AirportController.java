@@ -21,7 +21,7 @@ public class AirportController {
     public String allAirports(Model model, HttpSession session){
         List<Airport> airports = airportService.getAll();
         model.addAttribute("airports", airports);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         return "th_airport/airportList";
     }
@@ -29,7 +29,7 @@ public class AirportController {
     @GetMapping(value = "/{id}")
     public String getOne(@PathVariable Long id, Model model, HttpSession session){
         Airport airport = airportService.getById(id);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         model.addAttribute("airport", airport);
         return "th_airport/airportDetail";

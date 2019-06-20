@@ -1,14 +1,21 @@
 package edu.mum.cs544.bean;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
+    @Email(message = "Email badly formatted")
+    @NotBlank//(message = "Email can't be blank")
     private String email;
     private Role role;
 

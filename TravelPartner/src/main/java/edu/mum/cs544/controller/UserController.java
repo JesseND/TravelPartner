@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -25,15 +26,14 @@ public class UserController {
 //    }
 
     @GetMapping(value = {"/", "user/login"})
-    public String showLoginForm(@ModelAttribute("user") User user, HttpSession session) {
+    public String showLoginForm(@ModelAttribute("user") User user, HttpSession session, RedirectAttributes att) {
 
         if(session.getAttribute("user") != null){
             User user1 = (User) session.getAttribute("user");
 
             return "redirect:/bookings/user/"+user1.getId();
         }
-
-
+        att.addFlashAttribute("error","No User for these Credentials");
         return "th_user/loginForm";
     }
 
@@ -43,9 +43,6 @@ public class UserController {
 
         session.setAttribute("user", userLoggedIn);
         model.addAttribute("user", userLoggedIn);
-//        model.addAttribute("userId", userLoggedIn.getId());
-//        model.addAttribute("userName", userLoggedIn.getName());
-//        model.addAttribute("userRole", userLoggedIn.getRole().toString());
         return "redirect:/bookings/user/"+userLoggedIn.getId();
     }
 

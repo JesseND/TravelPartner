@@ -17,28 +17,28 @@
     <link th:href="@{/resource/css/login.css}" rel="stylesheet" type="text/css"/>
 </head>
 
-
-
 <body class="container">
+<div>
+    <a href="/bookings/search" class="btn btn-primary btn-block" type="button"><span th:text="#{searchflight}"></span></a>
+    <a href="/hotel/list" class="btn btn-primary btn-block" type="button"><span th:text="#{searchhotel}"></span></a>
+</div>
 
+<a href="?language=en" >English</a> | <a href="?language=nl_NL" >Dutch</a>
 <form class="form-signin" th:action="@{/user/login}" th:object="${user}" method="post">
     <img class="mb-4" th:src="@{/resource/img/mum_logo.jpg}" alt="" width="72" height="72">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <span style="color: red" id="errorMessage"></span>
-    <label class="sr-only" th:text="Username"/>
-    <input class="form-control" type="text" th:name="username" id="username" placeholder="Enter USername"/><br>
-    <label class="sr-only" th:text="Password"/>
-    <input type="password" th:name="password" class="form-control" placeholder="Enter Password"/><br>
-    <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-    <p>New to the system?</p>
-    <button id="btnRegister" class="btn btn-lg btn-primary btn-block" type="button">Sign Up</button>
+    <h1 class="h3 mb-3 font-weight-normal"><span th:text="#{pleasesignin}"></span></h1>
+    <span th:if = "${error!=null}" th:text="${error}"    style="color: red" id="errorMessage"></span><br>
+    <label th:text="#{username}"/>
+    <input class="form-control" type="text" th:name="username" id="username" th:placeholder="#{enterusername}"/><br>
+    <label th:text="#{password}"/>
+    <input type="password" th:name="password" class="form-control"  th:placeholder="#{enterpassword}"/><br>
+    <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit"><span th:text="#{signin}"></span> </button>
+    <p> <span th:text="#{newtothesystem}"></span></p>
+    <button id="btnRegister" class="btn btn-lg btn-primary btn-block" type="button"><span th:text="#{signup}"></span></button>
 
 </form>
-<br/>
-<div class="container">
-    <a href="/bookings/search" class="btn btn-primary btn-block" type="button">Search Flight</a>
-    <a href="/hotel/list" class="btn btn-primary btn-block" type="button">Search hotel</a>
-</div>
+
+
 
 </body>
 

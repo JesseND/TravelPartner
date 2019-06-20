@@ -36,7 +36,7 @@
     <tr th:each="user: ${users}" class="active">
         <td th:text="${user.name}" />
         <td th:text="${user.email}" />
-        <td><a th:href="@{/user/delete/{id} (id=${user.id})}">Delete</a></td>
+        <td><a th:href="@{/user/delete/{id} (id=${user.id})}" onclick="return confirm('Are you sure you want to Delete this user?')">Delete</a></td>
     </tr>
     </tbody>
 </table>

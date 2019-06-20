@@ -22,7 +22,7 @@ public class AirplaneController {
     public String getAll(Model model, HttpSession session){
         List<Airplane> airplanes = airplaneService.getAll();
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         String role = user.getRole().toString();
@@ -41,7 +41,7 @@ public class AirplaneController {
         Airplane airplane = airplaneService.getOne(id);
         model.addAttribute("airplane", airplane);
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         return "th_airplane/airplaneDetail";

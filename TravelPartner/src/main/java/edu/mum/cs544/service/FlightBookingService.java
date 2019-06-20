@@ -21,7 +21,7 @@ public class FlightBookingService {
 
     private final String bookingUrl = "http://localhost:8077/api/booking/";
     private final String singleBookingUrl = "http://localhost:8077/api/booking/{id}";
-   //  /bookings/user/{id}
+   //  /bookings/th_user/{id}
 
     // all airlines
     public List<Booking> getAll(){
