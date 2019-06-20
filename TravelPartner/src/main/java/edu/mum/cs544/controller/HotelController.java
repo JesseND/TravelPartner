@@ -1,5 +1,6 @@
 package edu.mum.cs544.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,18 +44,6 @@ public class HotelController {
 		return "hotelDetails";
 	}
 
-//	@GetMapping("/search")
-//	private String searchHotel() {
-//		return "searchHotel";
-//	}
-//
-//	@RequestMapping("/search/")
-//	private String getOneHotel(@RequestParam("hname") String name, Model model) {
-//		model.addAttribute("hotels", hService.findHotelByName(name.trim()));
-//		model.addAttribute("keyword", name);
-//		return "hotelsList";
-//	}
-
 	@GetMapping("/add")
 	private String addHotel(@ModelAttribute("hotel") Hotel hotel) {
 		return "addHotelForm";
@@ -96,37 +85,40 @@ public class HotelController {
 		return "hotelRooms";
 	}
 
-//	@GetMapping("/reservation/{hotelId}/{roomNumber}")
-//	private String reservation(@PathVariable long hotelId, @PathVariable long roomNumber,
-//			@ModelAttribute("reservation") Reservation reservation, Model model) {
-//		model.addAttribute("hId", hotelId);
-//		model.addAttribute("hname", hService.get(hotelId).getName());
-//		model.addAttribute("rn", roomNumber);
-//		return "reservationRoomForm";
-//	}
-//
-//	@PostMapping("/reservation/{hotelId}/{roomNumber}")
-//	private String addReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result,
-//			Model model) {
-//
-//		long hotelId = reservation.getRoomId().getHotelId();
-//		long roomNumber = reservation.getRoomId().getRoomNumber();
-//		RoomIdentity rd = new RoomIdentity(hotelId, roomNumber);
-//		reservation.setRoomId(rd);
-//		String name = hService.get((hotelId)).getName();
-//		Room room = rService.get(rd);
-//
-//		if (result.hasErrors()) {
-//			return "redirect: /reservation/" + hotelId + "/" + roomNumber;
-//		} else if (room.isReserved()) {
-//			model.addAttribute("message", "The Room you are trying to reseved is booked by an other customer");
-//		} else {
-//			model.addAttribute("message", "You've Successfully Booked Room number: " + roomNumber + " @ " + name);
-//			room.setReserved(true);
-//			reservation.setStatus("Approved");
-//			resService.save(reservation);
-//			rService.save(room);
-//		}
-//		return "reserveConfirmation";
-//	}
+	@GetMapping("/reservation/{hotelId}/{roomNumber}")
+	private String reservation(@PathVariable long hotelId, @PathVariable long roomNumber,
+			@ModelAttribute("reservation") Reservation reservation, Model model) {
+		model.addAttribute("hId", hotelId);
+		model.addAttribute("hname", hService.getOne(hotelId).getName());
+		model.addAttribute("rn", roomNumber);
+		return "reservationRoomForm";
+	}
+
+	@PostMapping("/reservation/{hotelId}/{roomNumber}")
+	private String addReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result,
+			Model model, HttpSession session) {
+
+		User user = (User) session.getAttribute("user");
+		reservation.setUserId(user.getId());
+
+		long hotelId = reservation.getRoomId().getHotelId();
+		long roomNumber = reservation.getRoomId().getRoomNumber();
+		RoomIdentity rd = new RoomIdentity(hotelId, roomNumber);
+		reservation.setRoomId(rd);
+		String name = hService.getOne((hotelId)).getName();
+		Room room = rService.getRoomByIdentity(rd);
+
+		if (result.hasErrors()) {
+			return "redirect: /reservation/" + hotelId + "/" + roomNumber;
+		} else if (room.isReserved()) {
+			model.addAttribute("message", "The Room you are trying to reseved is booked by an other customer");
+		} else {
+			model.addAttribute("message", "You've Successfully Booked Room number: " + roomNumber + " @ " + name);
+			room.setReserved(true);
+			reservation.setStatus("Approved");
+			resService.saveReservation(reservation);
+			rService.saveRoom(room);
+		}
+		return "reserveConfirmation";
+	}
 }

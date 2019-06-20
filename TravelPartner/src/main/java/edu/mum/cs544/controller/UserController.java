@@ -23,10 +23,15 @@ public class UserController {
 //    public String goToLogIn(){
 //
 //    }
+    
+//    @GetMapping("/")
+//    public String show() {
+//    	return "th_index";
+//    }
 
     @GetMapping(value = {"/", "user/login"})
     public String showLoginForm(@ModelAttribute("user") User user) {
-        return "user/loginForm";
+        return "th_user/loginForm";
     }
 
     @PostMapping("/user/login")
@@ -38,12 +43,12 @@ public class UserController {
 //        model.addAttribute("userId", userLoggedIn.getId());
 //        model.addAttribute("userName", userLoggedIn.getName());
 //        model.addAttribute("userRole", userLoggedIn.getRole().toString());
-        return "user/mainPage";
+        return "th_user/mainPage";
     }
 
     @GetMapping("/user/register")
     public String showRegisterForm(@ModelAttribute("user") User user) {
-        return "user/registerForm";
+        return "th_user/registerForm";
     }
 
     @PostMapping("/user/register")
@@ -56,7 +61,7 @@ public class UserController {
         model.addAttribute("userId", registeredUser.getId());
         model.addAttribute("userName", registeredUser.getName());
         model.addAttribute("userRole", registeredUser.getRole().toString());
-        return "user/mainPage";
+        return "th_user/mainPage";
     }
 
 
@@ -71,14 +76,14 @@ public class UserController {
         model.addAttribute("user", user);
 
         model.addAttribute("users", users);
-        return "user/usersList";
+        return "th_user/usersList";
     }
 
     @GetMapping("/user/update/{id}")
     public String showUpdateInfoForm(@ModelAttribute("user") User user, @PathVariable Integer id, Model model) {
         User currentUser = userService.get(id);
         model.addAttribute("user", currentUser);
-        return "user/updateUserForm";
+        return "th_user/updateUserForm";
     }
 
     @PostMapping("/user/update/{id}")
@@ -87,7 +92,7 @@ public class UserController {
         model.addAttribute("user", user);
 
         userService.update(user);
-        return "user/mainPage";
+        return "th_user/mainPage";
     }
 //    @GetMapping("/users/delete/{id}")
 //    public String showDeleteForm(@PathVariable int id, Model model) {
@@ -105,7 +110,7 @@ public class UserController {
     public String logout(HttpSession session) {
         // session.removeAttribute("user");
         session.invalidate();
-        return "user/loginForm";
+        return "th_user/loginForm";
     }
 
 }

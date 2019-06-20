@@ -1,26 +1,12 @@
 package edu.mum.cs544.bean;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
-
-import java.util.List;
-
-@Entity
 public class Hotel {
 
-	@Id
-	@GeneratedValue
 	private long id;
 
 	@NotBlank
@@ -37,7 +23,6 @@ public class Hotel {
 	@Min(value = 50)
 	private int capacity;
 
-	@Embedded
 	@NotNull
 	private Location location;
 

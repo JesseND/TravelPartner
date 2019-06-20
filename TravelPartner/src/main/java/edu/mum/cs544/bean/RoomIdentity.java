@@ -2,9 +2,6 @@ package edu.mum.cs544.bean;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class RoomIdentity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

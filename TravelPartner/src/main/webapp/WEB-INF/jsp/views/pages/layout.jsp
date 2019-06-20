@@ -33,11 +33,11 @@
 						<div class="container">
 							<div class="container">
 								<div class="navbar-header">
-									<a class="navbar-brand" href="/">Hotel Management App</a>
+									<a class="navbar-brand" href="/user/mainPage">TravelPartner</a>
 								</div>
 								<ul class="nav navbar-nav">
 									<li class="dropdown"><a class="dropdown-toggle"
-										data-toggle="dropdown" href="/hotel/list">Hotel <span
+										data-toggle="dropdown" href="/hotel/list">Hotels <span
 											class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li><a href="/hotel/list">Hotels List</a></li>
@@ -49,14 +49,6 @@
 										data-toggle="dropdown" href="#">Room<span class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li><a href="/hotel/room/add">Add </a></li>
-											<li><a href="/hotel/room/update">Update</a></li>
-										</ul></li>
-									<li class="dropdown"><a class="dropdown-toggle"
-										data-toggle="dropdown" href="/hotel/payments">Bill<span
-											class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="/hotel/payments">Payment List</a></li>
-											<li><a href="/hotel/add/payment">Add Payment</a></li>
 										</ul></li>
 								</ul>
 							</div>
