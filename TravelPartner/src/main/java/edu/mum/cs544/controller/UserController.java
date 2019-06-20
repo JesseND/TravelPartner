@@ -7,47 +7,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-//@SessionAttributes(value={"userId", "name", "userRole"})
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/")
-//    public String goToLogIn(){
-//
-//    }
-
     @GetMapping(value = {"/", "user/login"})
     public String showLoginForm(@ModelAttribute("user") User user) {
-        return "user/loginForm";
+        return "th_user/loginForm";
     }
 
     @PostMapping("/user/login")
-    public String processLogin(User user, Model model, HttpSession session) {
+    public String processLogin(User user, Model model, HttpSession session, RedirectAttributes att) {
         User userLoggedIn = userService.userLogIn(user.getUsername(), user.getPassword());
 
-        session.setAttribute("user", userLoggedIn);
-        model.addAttribute("user", userLoggedIn);
+        if (userLoggedIn==null){
+            att.addFlashAttribute("error","No User for these Credentials");
+            return "redirect:/user/login";
+
+        }else {
+            session.setAttribute("user", userLoggedIn);
+            model.addAttribute("user", userLoggedIn);
 //        model.addAttribute("userId", userLoggedIn.getId());
 //        model.addAttribute("userName", userLoggedIn.getName());
 //        model.addAttribute("userRole", userLoggedIn.getRole().toString());
-        return "redirect:/bookings/user/"+userLoggedIn.getId();
+            return "redirect:/bookings/user/" + userLoggedIn.getId();
+        }
     }
 
     @GetMapping("/user/register")
     public String showRegisterForm(@ModelAttribute("user") User user) {
-        return "user/registerForm";
+        return "th_user/registerForm";
     }
 
     @PostMapping("/user/register")
-    public String processRegisterForm(User user, Model model, HttpSession session) {
+    public String processRegisterForm(@Valid User user, BindingResult result, Model model, HttpSession session) {
+
+        if (result.hasErrors()){
+            return "th_user/registerForm";
+        }
         User registeredUser = userService.registerUser(user);
 
         model.addAttribute("user", registeredUser);
@@ -56,7 +63,7 @@ public class UserController {
         model.addAttribute("userId", registeredUser.getId());
         model.addAttribute("userName", registeredUser.getName());
         model.addAttribute("userRole", registeredUser.getRole().toString());
-        return "user/mainPage";
+        return "th_user/mainPage";
     }
 
 
@@ -67,18 +74,18 @@ public class UserController {
     public String allUsers(Model model, HttpSession session) {
         List<User> users = userService.getAll();
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         model.addAttribute("users", users);
-        return "user/usersList";
+        return "th_user/usersList";
     }
 
     @GetMapping("/user/update/{id}")
     public String showUpdateInfoForm(@ModelAttribute("user") User user, @PathVariable Integer id, Model model) {
         User currentUser = userService.get(id);
         model.addAttribute("user", currentUser);
-        return "user/updateUserForm";
+        return "th_user/updateUserForm";
     }
 
     @PostMapping("/user/update/{id}")
@@ -87,13 +94,8 @@ public class UserController {
         model.addAttribute("user", user);
 
         userService.update(user);
-        return "user/mainPage";
+        return "th_user/mainPage";
     }
-//    @GetMapping("/users/delete/{id}")
-//    public String showDeleteForm(@PathVariable int id, Model model) {
-//        //model.addAttribute("user", userService.find(id));
-//        return "deleteUserForm";
-//    }
 
     @PostMapping(value = "/user/delete/{id}")
     public String delete(@PathVariable Integer id) {
@@ -103,9 +105,9 @@ public class UserController {
 
     @GetMapping(value = "/user/logout")
     public String logout(HttpSession session) {
-        // session.removeAttribute("user");
+        // session.removeAttribute("th_user");
         session.invalidate();
-        return "user/loginForm";
+        return "th_user/loginForm";
     }
 
 }

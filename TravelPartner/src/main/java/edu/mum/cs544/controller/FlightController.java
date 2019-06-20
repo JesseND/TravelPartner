@@ -52,7 +52,7 @@ public class FlightController {
         model.addAttribute("airlines", airlines);
         model.addAttribute("airplanes", airplanes);
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         return "flight/flightList";
@@ -80,7 +80,7 @@ public class FlightController {
 
         // System.out.println("date arr: "+ format.format(arr));
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         model.addAttribute("arrDate", format.format(arr));
@@ -151,9 +151,9 @@ public class FlightController {
     @GetMapping(value = "/booking/{flightId}")
     public String book(@PathVariable long flightId, HttpSession session, Model model) {
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
 
-        System.out.println("user in session: " + user.toString());
+        System.out.println("th_user in session: " + user.toString());
         
         Booking booking = new Booking();
         booking.setActive(true);

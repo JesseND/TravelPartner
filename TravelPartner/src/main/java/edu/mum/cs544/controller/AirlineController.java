@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/airlines")
-// @SessionAttributes("user")
+// @SessionAttributes("th_user")
 public class AirlineController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class AirlineController {
     public String allAirlines(Model model, HttpSession session){
         List<Airline> airlines = airlineService.getAll();
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         model.addAttribute("airlines", airlines);
         return "airline/airlineList";
@@ -40,7 +40,7 @@ public class AirlineController {
     @GetMapping(value = "/{id}")
     public String getOne(@PathVariable Long id, Model model, HttpSession session){
         Airline airline = airlineService.getOne(id);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         model.addAttribute("airline", airline);
         return "airline/airlineDetail";

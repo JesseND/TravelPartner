@@ -35,7 +35,7 @@ public class FlightBookingController {
 
         model.addAttribute("bookings", bookings);
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
 
         return "bookings/bookingList";
@@ -54,12 +54,12 @@ public class FlightBookingController {
 
         List<Flight> flightsByQuery = flightService.flightsByQuery(origin, destination);
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
 
         boolean isEmpty = true;
         boolean isLoggedIn = false;
 
-        if(session.getAttribute("user") != null)
+        if(session.getAttribute("th_user") != null)
             isLoggedIn = true;
 
         if(flightsByQuery.size() > 0)
@@ -87,12 +87,12 @@ public class FlightBookingController {
 
         long flightId = booking.getFlight_id();
         model.addAttribute("booking", booking);
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("th_user");
         model.addAttribute("user", user);
         return "redirect:/flights/"+flightId;
     }
 
-    /** shows a list of all bookings of one user*/
+    /** shows a list of all bookings of one th_user*/
     @GetMapping(value = "/user/{id}")
     public String listOfBookingByUser(@PathVariable Integer id, Model model){
         User user = userService.get(id);
@@ -114,7 +114,7 @@ public class FlightBookingController {
         model.addAttribute("flights", flights);
         model.addAttribute("user", user);
 
-        System.out.println("/bookings/user/"+user.getId());
+        System.out.println("/bookings/th_user/"+user.getId());
 
         return "bookings/bookingDetail";
     }
