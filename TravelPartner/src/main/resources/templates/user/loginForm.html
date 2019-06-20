@@ -20,14 +20,14 @@
 
 
 <body class="container">
-
+<a href="?language=en" >English</a>  |  <a href="?language=nl_NL" >Nepali</a>
 <form class="form-signin" th:action="@{/user/login}" th:object="${user}" method="post">
     <img class="mb-4" th:src="@{/resource/img/mum_logo.jpg}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <span style="color: red" id="errorMessage"></span>
-    <label class="sr-only" th:text="Username"/>
+    <label th:text="#{username}"/>
     <input class="form-control" type="text" th:name="username" id="username" placeholder="Enter USername"/><br>
-    <label class="sr-only" th:text="Password"/>
+    <label th:text="#{password}"/>
     <input type="password" th:name="password" class="form-control" placeholder="Enter Password"/><br>
     <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
     <p>New to the system?</p>
