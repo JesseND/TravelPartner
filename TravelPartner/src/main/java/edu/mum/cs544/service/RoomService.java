@@ -21,7 +21,7 @@ public class RoomService {
 
 	private final String roomsUrl = "http://localhost:8089/hotel/api/{id}/rooms";
 	private final String roomAddUrl = "http://localhost:8089/hotel/room/api/add";
-	private final String getRoomByIdentity = "http://localhost:8089//hotel/room/api/find";
+	private final String getRoomByIdentityUrl = "http://localhost:8089/hotel/room/api/find/{hotelId}/{roomNumber}";
 	private final String roomUpdateUrl = "http://localhost:8089/hotel/api/update/{id}";
 
 	// all Rooms
@@ -44,7 +44,7 @@ public class RoomService {
 	}
 
 	// get Room by Identity
-	public Room getRoomByIdentity(RoomIdentity rd) {
-		return restTemplate.getForObject(getRoomByIdentity, Room.class, rd);
+	public Room getRoomByIdentity(long hotelId, long roomNumber) {
+		return  restTemplate.getForObject(getRoomByIdentityUrl, Room.class, hotelId, roomNumber);
 	}
 }

@@ -19,6 +19,8 @@ import edu.mum.cs544.service.HotelService;
 import edu.mum.cs544.service.ReservationService;
 import edu.mum.cs544.service.RoomService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
@@ -35,12 +37,14 @@ public class HotelController {
 	@GetMapping("/list")
 	private String getHotelList(Model model) {
 		model.addAttribute("hotels", hService.getAll());
+		System.out.println("GET: /hotel/list");
 		return "hotelsList";
 	}
 
 	@GetMapping("/{id}")
 	private String getHotel(@PathVariable long id, Model model) {
 		model.addAttribute("hotel", hService.getOne(id));
+		System.out.println("POST: /hotel/list");
 		return "hotelDetails";
 	}
 
@@ -95,18 +99,16 @@ public class HotelController {
 	}
 
 	@PostMapping("/reservation/{hotelId}/{roomNumber}")
-	private String addReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result,
+	private String addReservation(@PathVariable long hotelId, @PathVariable long roomNumber, @Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result,
 			Model model, HttpSession session) {
 
 		User user = (User) session.getAttribute("user");
 		reservation.setUserId(user.getId());
-
-		long hotelId = reservation.getRoomId().getHotelId();
-		long roomNumber = reservation.getRoomId().getRoomNumber();
+		System.out.println("------------> "+user.getId()+"<-------------------");
 		RoomIdentity rd = new RoomIdentity(hotelId, roomNumber);
 		reservation.setRoomId(rd);
 		String name = hService.getOne((hotelId)).getName();
-		Room room = rService.getRoomByIdentity(rd);
+		Room room = rService.getRoomByIdentity(hotelId, roomNumber);
 
 		if (result.hasErrors()) {
 			return "redirect: /reservation/" + hotelId + "/" + roomNumber;
@@ -121,4 +123,17 @@ public class HotelController {
 		}
 		return "reserveConfirmation";
 	}
+
+//	@GetMapping("/hotel/myReservation")
+//	private String myReservation(Model model, HttpSession session){
+//		User user = (User) session.getAttribute("user");
+//		List<Reservation> reservs  = resService.getAllReservations(user.getId());
+//		if(reservs == null){
+//			System.out.println("null");
+//		}else{
+//			System.out.println(reservs);
+//		}
+//		model.addAttribute("myReservations", reservs);
+//		return "myReservation";
+//	}
 }

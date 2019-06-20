@@ -14,7 +14,7 @@ public class JspConfig {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
          
         viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/jsp/views/pages");
+        viewResolver.setPrefix("/WEB-INF/jsp/views/pages/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setContentType("text/html");
          

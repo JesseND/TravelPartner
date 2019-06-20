@@ -5,6 +5,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
+    <title>Hotels</title>
     <link rel="stylesheet" href="../../../css/main.css">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -34,7 +35,6 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="/hotel/list">Hotels List</a></li>
                                         <li><a href="/hotel/add">Add Hotel</a></li>
-                                        <!-- <li><a href="/hotel/search">Search</a> -->
                                     </ul>
                                 </li>
 
@@ -53,30 +53,39 @@
         </nav>
     </div>
     <!-- End header -->
+
     <div class="container">
-        <h2>Hotel Details:</h2>
+        <div class="container">
 
-        <h3>${hotel.name}</h3>
-        <h4>Ranking: ${hotel.ranking}</h4>
-        <h4>Capacity : ${hotel.capacity} Customers</h4>
-        <br> <br>
-        <h5>
-            <b>Location:</b> Street: ${hotel.location.street}, Zip:
-            ${hotel.location.zipcode}, City: ${hotel.location.city}, Country:
-            ${hotel.location.country},
-        </h5>
-
-        <p>${hotel.description}</p>
-
-        <a href="/hotel/${hotel.id}/rooms">
-            <button type="button"
-                    class="btn btn-info col-2">Make Reservations
-            </button>
-        </a>
-        </td> <br> <br> <br> <a href="/hotel/list"><input
-            type="button" value="Back"/></a>
-
+            <h2>My Reservations </h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Check In Date </th>
+                    <th>Check Out Date </th>
+                    <th>Reservation Status</th>
+                    <th>Hotel Id</th>
+                    <th>Room Number</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${myReservations}" var="myReservation">
+                    <tr class="active">
+                        <td><c:out value="${myReservation.checkin}"/></td>
+                        <td><c:out value="${myReservation.checkout}"/></td>
+                        <td><c:out value="${myReservation.status}"/></td>
+                        <td><c:out value="${myReservation.roomId.hotelId}"/></td>
+                        <td><c:out value="${myReservation.roomId.roomNumber}"/></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+            <a href="/"><input type="button" value="return to HomePage"/></a>
+        </div>
     </div>
+
 </div>
+</body>
+
 </body>
 </html>
