@@ -2,10 +2,6 @@ package edu.mum.cs544.bean;
 
 import java.util.Date;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Future;
@@ -14,11 +10,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
 public class Reservation {
 
-	@Id
-	@GeneratedValue
 	private long id;
 
 	@NotNull
@@ -38,7 +31,6 @@ public class Reservation {
 
 	private String status;
 
-	@Embedded
 	@NotNull
 	private RoomIdentity roomId;
 

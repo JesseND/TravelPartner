@@ -19,8 +19,6 @@ import java.util.List;
 @Entity
 public class Hotel {
 
-	@Id
-	@GeneratedValue
 	private long id;
 
 	@NotBlank
@@ -37,7 +35,6 @@ public class Hotel {
 	@Min(value = 50)
 	private int capacity;
 
-	@Embedded
 	@NotNull
 	private Location location;
 
