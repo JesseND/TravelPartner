@@ -37,7 +37,8 @@ public class RoomController {
 			return "addHotelRoomForm";
 		}
 		rService.saveRoom(room);
-		return "redirect:/hotel/room/list";
+		long hotelId = room.getRoomId().getHotelId();
+		return "redirect:/hotel/"+hotelId+"/rooms";
 	}
 
 	@GetMapping("/update/{id}")
