@@ -90,7 +90,7 @@ public class FlightController {
         model.addAttribute("depTime", time.format(flight.getDepartureTime()));
 
         model.addAttribute("flight", flight);
-        return "flight/flightDetail";
+        return "th_flight/flightDetail";
     }
 
     private Flight getFlight(String flightnr, String departureDate, String departureTime,

@@ -32,7 +32,7 @@ public class AirlineController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
         model.addAttribute("airlines", airlines);
-        return "airline/airlineList";
+        return "th_airline/airlineList";
     }
 
     // public void addUserToModel(mo)
@@ -43,7 +43,7 @@ public class AirlineController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
         model.addAttribute("airline", airline);
-        return "airline/airlineDetail";
+        return "th_airline/airlineDetail";
     }
 
     @PostMapping()

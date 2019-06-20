@@ -38,7 +38,7 @@ public class FlightBookingController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user);
 
-        return "bookings/bookingList";
+        return "th_bookings/bookingList";
     }
 
     /** search flights by origin and destination*/
@@ -46,7 +46,7 @@ public class FlightBookingController {
     public String search(){
         System.out.println("we are searching");
 
-        return "bookings/search";
+        return "th_bookings/search";
     }
 
     @PostMapping(value = "/search")
@@ -77,7 +77,7 @@ public class FlightBookingController {
         model.addAttribute("destination", destination);
         model.addAttribute("flights", flightsByQuery);
 
-        return "flight/flightQuery";
+        return "th_flight/flightQuery";
     }
 
     /** shows a single view of one booking*/
@@ -116,7 +116,7 @@ public class FlightBookingController {
 
         System.out.println("/bookings/user/"+user.getId());
 
-        return "bookings/bookingDetail";
+        return "th_bookings/bookingDetail";
     }
 
 
